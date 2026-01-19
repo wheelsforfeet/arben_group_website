@@ -280,7 +280,7 @@ img {
 
 /* Clean Modern Component (Replaces Glass) */
 .glass {
-  background: var(--ash-mist);
+  background: var(--parchment);
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   border-radius: var(--border-radius);
@@ -524,7 +524,7 @@ nav a:hover::after {
 
 .challenge-card {
   padding: 3rem 2rem;
-  background: var(--ash-mist);
+  background: var(--parchment);
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   text-align: center;
