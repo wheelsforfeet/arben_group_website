@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Arben Group | Insights</title>
+  <meta name="description" content="Essays and briefs by Ben Harris and Arden Smith, plus a research library of curated papers and studies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../VSCode/arben-style.css">
+  <style>
+    /* Page-specific enhancements */
+    .insights-hero{min-height:70vh;display:flex;align-items:center;position:relative;padding-top:8rem;padding-bottom:4rem;background:radial-gradient(circle at 18% 18%,rgba(64,75,105,.12),transparent 55%),radial-gradient(circle at 85% 0,rgba(240,190,70,.14),transparent 50%),linear-gradient(180deg,#fff 0%,var(--bg) 75%);} 
+    .insights-hero .container{display:grid;gap:1.5rem;max-width:920px;position:relative;z-index:1;}
+    .filter-bar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:.9rem 1rem;box-shadow:var(--shadow);} 
+    .tabs{display:flex;gap:.5rem;background:color-mix(in oklab,var(--arben-blue) 8%, #fff);border:1px solid var(--border);border-radius:999px;padding:.35rem;}
+    .tab{padding:.45rem .9rem;border-radius:999px;border:1px solid transparent;font-family:var(--font-sans);font-weight:700;background:transparent;color:var(--text);cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease;}
+    .tab.active{background:var(--arben-blue);color:#fff;box-shadow:0 12px 20px rgba(64,75,105,0.18);} 
+    .search{display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;flex:1 1 260px;min-width:240px;}
+    .search input{border:none;outline:none;font:inherit;width:100%;}
+    .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-left:auto;}
+    .tag{padding:.35rem .8rem;border-radius:999px;border:1px solid var(--border);background:#fff;font-family:var(--font-sans);font-weight:600;color:var(--muted);cursor:pointer;transition:background .18s ease,border-color .18s ease,color .18s ease;}
+    .tag.active{background:color-mix(in oklab,var(--arben-blue) 10%,#fff);border-color:color-mix(in oklab,var(--arben-blue) 20%, var(--border));color:var(--arben-blue);}
+    .insights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;align-content:start;}
+    .meta-line{font-size:var(--text-sm);color:var(--muted);font-family:var(--font-sans);}
+    .pill-row{display:flex;flex-wrap:wrap;gap:.35rem;}
+    .pill{padding:.3rem .65rem;border-radius:999px;background:color-mix(in oklab,var(--arben-blue) 8%, #fff);border:1px solid var(--border);font-size:var(--text-sm);font-family:var(--font-sans);color:var(--muted);} 
+    .side-panel{display:grid;gap:1rem;}
+    .side-panel .card{position:sticky;top:100px;}
+    .research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem;}
+    .research-grid ul{padding-left:1.1rem;margin:0;}
+    .external::after{content:"↗";margin-left:6px;font-size:.9em;opacity:.7;}
+    .cta-inline{display:inline-flex;align-items:center;gap:.4rem;}
+    @media (max-width:960px){.filter-bar{gap:.6rem;} .side-panel .card{position:static;} }
+    @media (max-width:680px){.filter-bar{flex-direction:column;align-items:stretch;} .tabs{width:100%;} .tags{width:100%;} .tags{justify-content:flex-start;} }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="brand">The Arben Group</div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <nav id="primary-nav">
+      <a href="index.html#problem">Problem</a>
+      <a href="index.html#approach">Approach</a>
+      <a href="index.html#services">Services</a>
+      <a href="arben-insights.html" aria-current="page">Insights</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO / FILTERS -->
+    <section class="hero insights-hero" aria-label="Insights">
+      <div class="container">
+        <div>
+          <p class="micro">Essays • Field Notes • Research Library</p>
+          <h1>Insights that strengthen culture, leadership, and resilience.</h1>
+          <p class="lead">Original writing from <strong>Ben Harris</strong> and <strong>Arden Smith</strong>, plus curated research we rely on when building healthy, high-performing teams.</p>
+        </div>
+        <div class="filter-bar" aria-label="Filters">
+          <div class="tabs" role="tablist" aria-label="Content source">
+            <button class="tab active" role="tab" aria-selected="true" data-tab="all">All</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="arden">Arden</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="ben">Ben</button>
+            <button class="tab" role="tab" aria-selected="false" data-tab="research">Research Library</button>
+          </div>
+          <label class="search" for="search-input">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="#94a3b8" fill="none"/><line x1="16.65" y1="16.65" x2="22" y2="22" stroke="#94a3b8"/></svg>
+            <input id="search-input" type="search" placeholder="Search topics, titles…" />
+          </label>
+          <div class="tags" aria-label="Topic tags">
+            <button class="tag" data-tag="leadership">Leadership</button>
+            <button class="tag" data-tag="culture">Culture</button>
+            <button class="tag" data-tag="retention">Retention</button>
+            <button class="tag" data-tag="resilience">Resilience</button>
+            <button class="tag" data-tag="clinical">Clinical</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT GRID + SIDEBAR -->
+    <section id="insights-feed">
+      <div class="container" style="display:grid;grid-template-columns:1fr 0.75fr;gap:1.5rem;align-items:start;">
+        <div class="insights-grid" id="feed" aria-live="polite">
+          <article class="card" data-author="arden" data-tags="culture,retention">
+            <div class="meta-line">Arden Smith • Essay</div>
+            <h3><a href="#">When Values Become Habits</a></h3>
+            <p class="muted">Moving from posters to practice — rituals, norms, and cadence that keep values alive in daily work.</p>
+            <div class="pill-row"><span class="pill">Culture</span><span class="pill">Retention</span></div>
+          </article>
+          <article class="card" data-author="ben" data-tags="leadership,resilience">
+            <div class="meta-line">Ben Harris • Brief</div>
+            <h3><a href="#">The Manager’s Keystone</a></h3>
+            <p class="muted">First-line leaders carry more load than we admit. How to support them without adding friction.</p>
+            <div class="pill-row"><span class="pill">Leadership</span><span class="pill">Resilience</span></div>
+          </article>
+          <article class="card" data-author="research" data-tags="retention,culture">
+            <div class="meta-line">Research Library</div>
+            <h3><a href="#" class="external">Meta-Analysis: Drivers of Employee Retention</a></h3>
+            <p class="muted">Key predictors of stay/leave decisions and how leader behavior mediates intent to remain.</p>
+            <div class="pill-row"><span class="pill">Retention</span><span class="pill">Culture</span></div>
+          </article>
+          <article class="card" data-author="arden" data-tags="clinical,resilience">
+            <div class="meta-line">Arden Smith • Field Note</div>
+            <h3><a href="#">Psychological Safety in Clinical Teams</a></h3>
+            <p class="muted">Brief interventions that reduce error risk and improve collaboration under stress.</p>
+            <div class="pill-row"><span class="pill">Clinical</span><span class="pill">Resilience</span></div>
+          </article>
+          <article class="card" data-author="ben" data-tags="leadership,culture">
+            <div class="meta-line">Ben Harris • Perspective</div>
+            <h3><a href="#">Decision Rights Without Drama</a></h3>
+            <p class="muted">Clarify who decides, who advises, and who is informed — and why it calms teams.</p>
+            <div class="pill-row"><span class="pill">Leadership</span><span class="pill">Culture</span></div>
+          </article>
+          <article class="card" data-author="research" data-tags="resilience,clinical">
+            <div class="meta-line">Research Library</div>
+            <h3><a href="#" class="external">Burnout Indicators and Team Performance</a></h3>
+            <p class="muted">What the literature says about recovery cycles, load distribution, and supervisor impact.</p>
+            <div class="pill-row"><span class="pill">Resilience</span><span class="pill">Clinical</span></div>
+          </article>
+        </div>
+
+        <aside class="side-panel">
+          <div class="card">
+            <h3>About the Authors</h3>
+            <p class="muted"><strong>Arden Smith</strong> — Clinical treatment services; systems for psychological safety, recovery, and team resilience.</p>
+            <p class="muted"><strong>Ben Harris</strong> — Management services; leadership development, culture design, and operational enablement.</p>
+          </div>
+          <div class="card">
+            <h3>Submit a Paper</h3>
+            <p class="muted">Have a study worth including? Share a link with a short annotation.</p>
+            <a class="btn" href="#contact">Recommend Research</a>
+          </div>
+          <div class="card">
+            <h3>Stay Updated</h3>
+            <p class="muted">Get new essays and curated studies in your inbox.</p>
+            <form onsubmit="event.preventDefault(); this.reset(); alert('Thanks — you\'re on the list.');">
+              <div class="field">
+                <label for="newsletter-email">Email</label>
+                <input id="newsletter-email" type="email" placeholder="you@company.com" required />
+              </div>
+              <button class="submit" type="submit" style="width:100%">Subscribe</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RESEARCH LIBRARY -->
+    <section class="strip" id="library">
+      <div class="container">
+        <h2>Research Library</h2>
+        <p class="muted">Curated external sources the team references often. Each link opens in a new tab.</p>
+        <div class="research-grid">
+          <div class="card">
+            <h3>Leadership & Teams</h3>
+            <ul class="muted">
+              <li><a href="#" class="external" target="_blank" rel="noopener">Leader Behaviors that Predict Retention</a></li>
+              <li><a href="#" class="external" target="_blank" rel="noopener">Psychological Safety and Error Reduction</a></li>
+              <li><a href="#" class="external" target="_blank" rel="noopener">Manager Coaching: Meta-Review</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Culture & Engagement</h3>
+            <ul class="muted">
+              <li><a href="#" class="external" target="_blank" rel="noopener">Values Activation and Daily Habits</a></li>
+              <li><a href="#" class="external" target="_blank" rel="noopener">Engagement Drivers Across Sectors</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Wellness & Resilience</h3>
+            <ul class="muted">
+              <li><a href="#" class="external" target="_blank" rel="noopener">Burnout: Indicators & Interventions</a></li>
+              <li><a href="#" class="external" target="_blank" rel="noopener">Recovery Cycles and Performance</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Clinical & High-Stress Work</h3>
+            <ul class="muted">
+              <li><a href="#" class="external" target="_blank" rel="noopener">Trauma-Informed Leadership Essentials</a></li>
+              <li><a href="#" class="external" target="_blank" rel="noopener">De-escalation Training Outcomes</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section class="cta-band">
+      <div class="container">
+        <h2>Have a question about an article or study?</h2>
+        <p class="micro micro-soft">We’re happy to share context, implementation notes, or further reading.</p>
+        <a class="btn btn-invert" href="#contact">Schedule a Conversation</a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="grid">
+          <form id="contact-form" aria-label="Contact form" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-endpoint="https://formspree.io/f/YOUR_FORM_ID">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@company.com" required />
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" placeholder="Acme Co." />
+            </div>
+            <div class="field">
+              <label for="message">How can we help?</label>
+              <textarea id="message" name="message" placeholder="Question about an essay, request for a citation, etc."></textarea>
+            </div>
+            <button class="submit" type="submit">Send</button>
+            <p id="form-status" class="form-status" aria-live="polite"></p>
+          </form>
+          <div>
+            <p class="muted">Prefer email or a quick call?</p>
+            <p><strong>Arden Smith</strong><br/>
+              <a href="mailto:asmith@thearbengroup.com">asmith@thearbengroup.com</a><br/>
+              <a href="tel:+14358623452">(435) 862-3452</a>
+            </p>
+            <p><strong>Ben Harris</strong><br/>
+              <a href="mailto:bharris@thearbengroup.com">bharris@thearbengroup.com</a><br/>
+              <a href="tel:+14352294609">(435) 229-4609</a>
+            </p>
+            <p class="muted">Leadership • Culture • People Development</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-flex">
+      <div>© 2025 The Arben Group</div>
+      <div class="muted">Strong cultures don’t happen by accident. They’re built — one keystone at a time.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const primaryNav = document.getElementById('primary-nav');
+    if(navToggle && primaryNav){
+      navToggle.addEventListener('click', ()=>{
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        primaryNav.classList.toggle('is-open', !expanded);
+      });
+    }
+
+    // Custom entries (localStorage)
+    const STORAGE_KEY = 'arbenInsightsEntries';
+    const feed = document.getElementById('feed');
+
+    function loadStoredEntries(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch(err){
+        console.error('Failed to read stored entries', err);
+        return [];
+      }
+    }
+
+    function authorLabel(author){
+      const map = { ben:'Ben Harris', arden:'Arden Smith', research:'Research Library' };
+      return map[author] || author || 'Insight';
+    }
+
+    function createCard(entry){
+      const article = document.createElement('article');
+      const tags = Array.isArray(entry.tags) ? entry.tags : [];
+      const tagAttr = tags.join(',').toLowerCase();
+      article.className = 'card custom-entry';
+      article.dataset.author = entry.author || 'research';
+      article.dataset.tags = tagAttr;
+
+      const linkOpen = entry.url ? `<a href="${entry.url}" target="_blank" rel="noopener"${entry.url?.includes('http') ? ' class="external"' : ''}>${entry.title}</a>` : entry.title;
+
+      article.innerHTML = `
+        <div class="meta-line">${authorLabel(entry.author)} • ${entry.type || 'Entry'}</div>
+        <h3>${linkOpen}</h3>
+        <p class="muted">${entry.summary || ''}</p>
+        <div class="pill-row">${tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div>
+      `;
+      return article;
+    }
+
+    if(feed){
+      const stored = loadStoredEntries();
+      stored.forEach(entry => {
+        const card = createCard(entry);
+        feed.prepend(card);
+      });
+    }
+
+    // Filters
+    const tabs = document.querySelectorAll('.tab');
+    const searchInput = document.getElementById('search-input');
+    const tagButtons = document.querySelectorAll('.tag');
+
+    let activeTab = 'all';
+    let activeTag = null;
+    let query = '';
+
+    function applyFilters(){
+      const cards = feed ? feed.querySelectorAll('.card') : [];
+      cards.forEach(card => {
+        const author = card.dataset.author;
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const text = (card.innerText || '').toLowerCase();
+        const tabOk = (activeTab === 'all') || (author === activeTab);
+        const tagOk = !activeTag || tags.includes(activeTag);
+        const qOk = !query || text.includes(query);
+        card.style.display = (tabOk && tagOk && qOk) ? 'flex' : 'none';
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeTab = tab.dataset.tab;
+        applyFilters();
+      });
+    });
+
+    tagButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(activeTag === btn.dataset.tag){
+          activeTag = null;
+          btn.classList.remove('active');
+        } else {
+          tagButtons.forEach(b => b.classList.remove('active'));
+          activeTag = btn.dataset.tag;
+          btn.classList.add('active');
+        }
+        applyFilters();
+      });
+    });
+
+    if(searchInput){
+      searchInput.addEventListener('input', (e) => {
+        query = e.target.value.trim().toLowerCase();
+        applyFilters();
+      });
+    }
+
+    // Contact form submission (demo mode unless Formspree ID set)
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('form-status');
+    if(form){
+      const submitButton = form.querySelector('.submit');
+      const endpoint = form.dataset.endpoint;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const payload = Object.fromEntries(data.entries());
+
+        if(!endpoint || endpoint.includes('YOUR_FORM_ID')){
+          statusEl.textContent = "Thanks — demo mode is active. Add your Formspree ID to enable live submissions.";
+          form.reset();
+          return;
+        }
+
+        statusEl.textContent = "Sending…";
+        if(submitButton) submitButton.disabled = true;
+
+        try{
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if(res.ok){
+            statusEl.textContent = "Thank you — we'll be in touch shortly.";
+            form.reset();
+          } else {
+            statusEl.textContent = "We couldn't send your message right now. Please email asmith@thearbengroup.com.";
+          }
+        } catch(err){
+          statusEl.textContent = "Network issue. Please email asmith@thearbengroup.com.";
+        } finally {
+          if(submitButton) submitButton.disabled = false;
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,804 @@
+:root {
+  /* Primary Colors */
+  --arben-blue: #404B69;
+  /* Foundation Blue */
+  --arben-gold: #F0BE46;
+  /* Keystone Gold */
+
+  /* Neutrals */
+  --granite-white: #F9F9F9;
+  --parchment: #F2EDE7;
+  --ash-mist: #CCCBCB;
+  --stone-gray: #6E747F;
+  --sandstone: #D8CAAD;
+  --ironwork: #27303C;
+  /* Main Text Color */
+  --deep-basalt: #262E40;
+
+  /* Functional Mappings */
+  --bg-color: #FFFFFF;
+  --text-main: var(--ironwork);
+  --text-muted: var(--stone-gray);
+  --white: #FFFFFF;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --glass-blur: blur(12px);
+
+  /* Spacing & Layout */
+  --container-width: 1120px;
+  --section-padding: 6rem 1.5rem;
+  --border-radius: 16px;
+
+  /* Typography */
+  --font-serif: "Merriweather", serif;
+  --font-sans: "Montserrat", sans-serif;
+  --font-display: "Montserrat Alternates", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  /* Use Sans for body for modern feel, Serif for display if needed */
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-sans);
+  color: var(--arben-blue);
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-family: var(--font-display);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Utilities */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--arben-gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Background Decorations */
+.bg-shape {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.15;
+  /* Slightly increased visibility but still faint */
+  pointer-events: none;
+  height: auto;
+  object-fit: contain;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Shape 1: Top Right Edge */
+.shape-1 {
+  top: -2%;
+  right: -5%;
+  width: 31vw;
+  max-width: 410px;
+  transform: rotate(0deg);
+}
+
+/* Shape 2: Upper Left (Moved In) */
+.shape-2 {
+  top: 7%;
+  left: 8%;
+  width: 24vw;
+  max-width: 335px;
+  transform: rotate(180deg);
+}
+
+/* Shape 3: Upper Middle Right (Edge) */
+.shape-3 {
+  top: 15%;
+  right: -6%;
+  width: 34vw;
+  max-width: 430px;
+  transform: rotate(0deg);
+}
+
+/* Shape 4: Middle Left (Moved In) */
+.shape-4 {
+  top: 24%;
+  left: 12%;
+  width: 22vw;
+  max-width: 290px;
+  transform: rotate(180deg);
+}
+
+/* Shape 5: Middle Right (Semi-Center) */
+.shape-5 {
+  top: 32%;
+  right: 15%;
+  width: 19vw;
+  max-width: 265px;
+  transform: rotate(0deg);
+}
+
+/* Shape 6: Lower Left (Edge) */
+.shape-6 {
+  top: 41%;
+  left: -4%;
+  width: 29vw;
+  max-width: 385px;
+  transform: rotate(180deg);
+}
+
+/* Shape 7: Lower Right (Edge) */
+.shape-7 {
+  top: 50%;
+  right: -3%;
+  width: 26vw;
+  max-width: 360px;
+  transform: rotate(0deg);
+}
+
+/* Shape 8: Bottom Left (Semi-Center) */
+.shape-8 {
+  top: 59%;
+  left: 5%;
+  width: 24vw;
+  max-width: 310px;
+  transform: rotate(180deg);
+}
+
+/* Shape 9: Lower Middle Right */
+.shape-9 {
+  top: 68%;
+  right: 10%;
+  width: 22vw;
+  max-width: 290px;
+  transform: rotate(0deg);
+}
+
+/* Shape 10: Lower Left Edge */
+.shape-10 {
+  top: 77%;
+  left: -6%;
+  width: 31vw;
+  max-width: 410px;
+  transform: rotate(180deg);
+}
+
+/* Shape 11: Bottom Right Edge */
+.shape-11 {
+  top: 86%;
+  right: -5%;
+  width: 26vw;
+  max-width: 335px;
+  transform: rotate(0deg);
+}
+
+/* Shape 12: Bottom Left (Moved In) */
+.shape-12 {
+  top: 95%;
+  left: 14%;
+  width: 24vw;
+  max-width: 310px;
+  transform: rotate(180deg);
+}
+
+/* Background Patterns */
+.bg-pattern {
+  position: relative;
+}
+
+.bg-pattern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/keystone-pattern-jumble.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.03;
+  /* Extremely subtle */
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Clean Modern Component (Replaces Glass) */
+.glass {
+  background: var(--parchment);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: var(--border-radius);
+}
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+header.scrolled {
+  /* No change needed, or remove if we want static look, but keeping it simple is fine. 
+     Actually, user said "white bar at the top", implying it's always there. 
+     The previous code had transparency that turned white on scroll. 
+     I will just make the base header white. */
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 60px;
+  /* Increased for stacked wordmark */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--arben-blue);
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--arben-gold);
+  transition: width 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--arben-blue);
+  color: white;
+  box-shadow: 0 10px 20px rgba(64, 75, 105, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(64, 75, 105, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--arben-blue);
+  color: var(--arben-blue);
+}
+
+.btn-secondary:hover {
+  background: var(--arben-blue);
+  color: white;
+}
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 80px;
+  overflow: hidden;
+  background-color: var(--arben-blue);
+  color: var(--white);
+  z-index: 0;
+  /* Establish stacking context for ::before */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/white-arch.png');
+  background-size: auto 90%;
+  /* Height 90% */
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  opacity: 0;
+  /* Start hidden for animation */
+  animation: heroArchFadeIn 1.5s ease-out forwards, heroArchFloat 8s ease-in-out infinite 1.5s;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes heroArchFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 0.15;
+    /* Reduced to 15% */
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroArchFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.hero h1 {
+  color: var(--white);
+}
+
+.hero .muted {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hero .btn-secondary {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.hero .btn-secondary:hover {
+  background: var(--white);
+  color: var(--arben-blue);
+}
+
+.hero-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-keystone {
+  width: 130px;
+  /* Reduced from 200px */
+  height: auto;
+  object-fit: contain;
+  margin: 1.5rem auto;
+  opacity: 0;
+  /* Start hidden */
+  animation: jumblePopIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.5s;
+  /* Grow into place with bounce */
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.section-jumble {
+  width: 120px;
+  height: auto;
+  margin: 3rem auto;
+  display: block;
+  /* Ensures centering when used inside text-center containers with block margin auto */
+  opacity: 1;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.section-jumble:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+@keyframes jumblePopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Problem Section */
+.problem {
+  padding: var(--section-padding);
+}
+
+/* Challenge Cards */
+.challenge-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+
+.challenge-card {
+  padding: 3rem 2rem;
+  background: var(--parchment);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.challenge-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  text-align: center;
+  padding: 0;
+}
+
+.challenge-card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.challenge-card p {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* Approach Section */
+.approach {
+  padding: var(--section-padding);
+}
+
+/* Approach Steps */
+.approach-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.approach-step {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+
+.step-number {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--arben-blue) 0%, #5a6a8a 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 auto 1.5rem auto;
+  box-shadow: 0 8px 20px rgba(64, 75, 105, 0.2);
+}
+
+.approach-step h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.approach-step p {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* Services Section */
+.services {
+  padding: var(--section-padding);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+
+.service-card {
+  padding: 3rem 2.5rem;
+  text-align: left;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  text-align: center;
+  padding: 0;
+}
+
+.service-card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.service-card>p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.service-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+}
+
+.service-benefits li {
+  padding: 0.6rem 0 0.6rem 2rem;
+  position: relative;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.service-benefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--arben-gold);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--section-padding);
+}
+
+.contact-form {
+  padding: 3rem;
+  max-width: 700px;
+  margin: 0 auto 4rem auto;
+}
+
+/* Principals Section */
+.principals-section {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid rgba(64, 75, 105, 0.1);
+}
+
+.principals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.principal-card {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.principal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.principal-card h4 {
+  color: var(--arben-blue);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.principal-card p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.principal-card a {
+  color: var(--text-main);
+  transition: color 0.3s ease;
+}
+
+.principal-card a:hover {
+  color: var(--arben-blue);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--arben-blue);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--arben-blue);
+  box-shadow: 0 0 0 3px rgba(64, 75, 105, 0.1);
+}
+
+/* Footer */
+footer {
+  background: var(--arben-gold);
+  color: var(--arben-blue);
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.footer-logo {
+  height: 50px;
+  margin-bottom: 1.5rem;
+  filter: none;
+}
+
+/* Animations */
+
+
+@media (max-width: 768px) {
+
+  .challenge-cards,
+  .approach-steps,
+  .services-grid,
+  .principals-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-form {
+    padding: 2rem;
+  }
+
+  nav {
+    display: none;
+  }
+
+  /* Simplified mobile nav handling for MVP */
+}
+
+/* Chrome Optimization Helper */
+.reveal {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
