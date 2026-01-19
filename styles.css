@@ -280,7 +280,7 @@ img {
 
 /* Clean Modern Component (Replaces Glass) */
 .glass {
-  background: var(--parchment);
+  background: var(--ash-mist);
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   border-radius: var(--border-radius);
@@ -475,7 +475,7 @@ nav a:hover::after {
   /* Start hidden */
   animation: jumblePopIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.5s;
   /* Grow into place with bounce */
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
@@ -524,7 +524,7 @@ nav a:hover::after {
 
 .challenge-card {
   padding: 3rem 2rem;
-  background: var(--parchment);
+  background: var(--ash-mist);
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   text-align: center;
