@@ -557,6 +557,7 @@ nav a:hover::after {
 .challenge-card p {
   line-height: 1.8;
   font-size: 1rem;
+  flex-grow: 1;
 }
 
 /* Approach Section */
