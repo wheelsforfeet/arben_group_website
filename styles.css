@@ -851,27 +851,47 @@ footer {
 /* Note: This uses animation-timeline, check browser support via MDN. */
 @supports (animation-timeline: view()) {
 
-  /* Cards: animate up AND grow */
-  body.supports-scroll-timeline .challenge-card,
-  body.supports-scroll-timeline .approach-step,
-  body.supports-scroll-timeline .service-card {
+  /* Cards: animate up AND grow (Applied to WRAPPER) */
+  body.supports-scroll-timeline .anim-wrapper-card {
     animation: scrollFadeInUpGrow linear both;
     animation-timeline: view();
     animation-range: entry 0% entry 80%;
+    height: 100%;
+    /* Ensure wrapper fills grid cell */
   }
 
-  /* Headers (h2) grow animation */
-  body.supports-scroll-timeline h2 {
+  /* Remove animation from inner cards so hover works */
+  body.supports-scroll-timeline .challenge-card,
+  body.supports-scroll-timeline .approach-step,
+  body.supports-scroll-timeline .service-card {
+    animation: none;
+  }
+
+  /* Headers (h2) wrapper grow animation */
+  body.supports-scroll-timeline .anim-wrapper-header {
     animation: scrollGrowIn linear both;
     animation-timeline: view();
     animation-range: entry 0% entry 80%;
   }
 
-  /* Step numbers - prominent grow */
-  body.supports-scroll-timeline .step-number {
+  body.supports-scroll-timeline h2 {
+    animation: none;
+  }
+
+  /* Step numbers wrapper - prominent grow */
+  body.supports-scroll-timeline .anim-wrapper-step-number {
     animation: scrollGrowBig linear both;
     animation-timeline: view();
     animation-range: entry 0% entry 80%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  body.supports-scroll-timeline .step-number {
+    animation: none;
+    margin-bottom: 0;
+    /* Margin moved to wrapper */
   }
 
   /* Generic reveal elements */
@@ -882,39 +902,41 @@ footer {
   }
 
   /* Stagger effect using animation-delay */
-  body.supports-scroll-timeline .challenge-card:nth-child(1) {
+  /* Stagger effect using animation-delay */
+  /* Target the wrappers since they are the new direct children */
+  body.supports-scroll-timeline .challenge-cards .anim-wrapper-card:nth-child(1) {
     animation-delay: 0s;
   }
 
-  body.supports-scroll-timeline .challenge-card:nth-child(2) {
+  body.supports-scroll-timeline .challenge-cards .anim-wrapper-card:nth-child(2) {
     animation-delay: 0.1s;
   }
 
-  body.supports-scroll-timeline .challenge-card:nth-child(3) {
+  body.supports-scroll-timeline .challenge-cards .anim-wrapper-card:nth-child(3) {
     animation-delay: 0.2s;
   }
 
-  body.supports-scroll-timeline .approach-step:nth-child(1) {
+  body.supports-scroll-timeline .approach-steps .anim-wrapper-card:nth-child(1) {
     animation-delay: 0s;
   }
 
-  body.supports-scroll-timeline .approach-step:nth-child(2) {
+  body.supports-scroll-timeline .approach-steps .anim-wrapper-card:nth-child(2) {
     animation-delay: 0.15s;
   }
 
-  body.supports-scroll-timeline .approach-step:nth-child(3) {
+  body.supports-scroll-timeline .approach-steps .anim-wrapper-card:nth-child(3) {
     animation-delay: 0.3s;
   }
 
-  body.supports-scroll-timeline .service-card:nth-child(1) {
+  body.supports-scroll-timeline .services-grid .anim-wrapper-card:nth-child(1) {
     animation-delay: 0s;
   }
 
-  body.supports-scroll-timeline .service-card:nth-child(2) {
+  body.supports-scroll-timeline .services-grid .anim-wrapper-card:nth-child(2) {
     animation-delay: 0.1s;
   }
 
-  body.supports-scroll-timeline .service-card:nth-child(3) {
+  body.supports-scroll-timeline .services-grid .anim-wrapper-card:nth-child(3) {
     animation-delay: 0.2s;
   }
 
