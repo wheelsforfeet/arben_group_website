@@ -345,8 +345,7 @@
 
     // 1. Hero Animation
     const tlHero = gsap.timeline();
-    tlHero.from(".hero-content .eyebrow", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" })
-      .from(".hero-keystone", { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6")
+    tlHero.from(".hero-keystone", { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" })
       .from(".hero-content h1", { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
       .from(".hero-content p", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
       .from(".hero-content .btn", { y: 15, opacity: 0, stagger: 0.2, duration: 0.6, ease: "power2.out" }, "-=0.6");
