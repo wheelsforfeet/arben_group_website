@@ -461,6 +461,12 @@ nav a.btn::after {
 
 .hero h1 {
   color: var(--white);
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.hero h1:hover {
+  transform: translateY(-8px) scale(1.03);
 }
 
 .hero .muted {
@@ -492,17 +498,28 @@ nav a.btn::after {
   height: auto;
   object-fit: contain;
   margin: 1.5rem auto;
-  opacity: 0;
-  /* Start hidden */
-  animation: jumblePopIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.5s;
-  /* Grow into place with bounce */
+  opacity: 1;
+  /* GSAP handles opacity on wrapper */
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
-  /* Modern CSS: Optimize animation performance */
-  will-change: transform, opacity;
+  transition: transform 0.3s ease;
+  will-change: transform;
 }
+
+.hero-keystone:hover {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.45));
+}
+
+/* Wrappers for Hero Animations (Targeted by GSAP) */
+.anim-wrapper-hero-title,
+.anim-wrapper-hero-keystone {
+  display: block;
+}
+
+
 
 .section-jumble {
   width: 120px;
@@ -522,17 +539,7 @@ nav a.btn::after {
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25));
 }
 
-@keyframes jumblePopIn {
-  from {
-    opacity: 0;
-    transform: scale(0.3);
-  }
 
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
 /* Problem Section */
 .problem {

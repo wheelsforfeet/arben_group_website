@@ -57,8 +57,12 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="container hero-content">
-      <h1>Build the Culture That<br>Keeps Your Best People.</h1>
-      <img src="assets/jumble-02.png" class="hero-keystone" alt="">
+      <div class="anim-wrapper-hero-title">
+        <h1>Build the Culture That<br>Keeps Your Best People.</h1>
+      </div>
+      <div class="anim-wrapper-hero-keystone">
+        <img src="assets/jumble-02.png" class="hero-keystone" alt="">
+      </div>
       <p class="muted" style="font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem auto;">
         Turnover isn't just an HR problem—it's a structural one. We help organizations fix the leadership gaps and
         cultural cracks that slow down growth.
@@ -376,9 +380,10 @@
     });
 
     // 1. Hero Animation
+    // 1. Hero Animation
     const tlHero = gsap.timeline();
-    tlHero.from(".hero-keystone", { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" })
-      .from(".hero-content h1", { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+    tlHero.from(".anim-wrapper-hero-keystone", { scale: 0.3, opacity: 0, duration: 0.8, ease: "back.out(1.7)" })
+      .from(".anim-wrapper-hero-title", { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
       .from(".hero-content p", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
       .from(".hero-content .btn", { y: 15, opacity: 0, stagger: 0.2, duration: 0.6, ease: "power2.out" }, "-=0.6");
 
