@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Animation Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 50px;
+            font-family: sans-serif;
+            background: #f5f5f5;
+        }
+
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #404B69;
+            margin-bottom: 30px;
+        }
+
+        .status {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .status h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .status code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        /* Test 1: Simple CSS Animation */
+        .test-box {
+            width: 200px;
+            height: 100px;
+            background: #404B69;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .test-box:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 20px 40px rgba(64, 75, 105, 0.3);
+            background: #F0BE46;
+            color: #404B69;
+        }
+
+        /* Test 2: Keyframe Animation */
+        .animated-box {
+            width: 200px;
+            height: 100px;
+            background: #F0BE46;
+            color: #404B69;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border-radius: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        /* Test 3: Scroll-Driven Animation (Chrome 115+) */
+        .scroll-test-container {
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+
+        .scroll-box {
+            width: 200px;
+            height: 100px;
+            background: #404B69;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1000px 0;
+            border-radius: 8px;
+        }
+
+        /* Native CSS scroll-driven animation */
+        @supports (animation-timeline: view()) {
+            .scroll-box {
+                animation: scrollFadeIn linear both;
+                animation-timeline: view();
+                animation-range: entry 0% entry 100%;
+            }
+
+            @keyframes scrollFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>🧪 Chrome Animation Test</h1>
+
+        <div class="status" id="status">
+            <h2>Browser Detection Results:</h2>
+            <p><strong>User Agent:</strong> <code id="userAgent"></code></p>
+            <p><strong>Supports animation-timeline:</strong> <code id="supportsScrollTimeline"></code></p>
+            <p><strong>Supports content-visibility:</strong> <code id="supportsContentVisibility"></code></p>
+            <p><strong>Supports will-change:</strong> <code id="supportsWillChange"></code></p>
+        </div>
+
+        <div class="info">
+            <h3>Test 1: Hover Animation</h3>
+            <p>Hover over the box below - it should lift up, scale, change color, and show a shadow.</p>
+        </div>
+        <div class="test-box">Hover Me!</div>
+
+        <div class="info">
+            <h3>Test 2: Keyframe Animation</h3>
+            <p>This box should be pulsing continuously (no interaction needed).</p>
+        </div>
+        <div class="animated-box">Pulsing Animation</div>
+
+        <div class="info">
+            <h3>Test 3: Scroll Animation</h3>
+            <p>Scroll down to see if the scroll-driven animation works (Chrome 115+ only).</p>
+        </div>
+
+        <div class="scroll-test-container">
+            <div class="scroll-box">Scroll to Me!</div>
+            <div class="scroll-box">And Me!</div>
+            <div class="scroll-box">Me Too!</div>
+        </div>
+
+        <div style="height: 500px;"></div>
+    </div>
+
+    <script>
+        // Display browser info
+        document.getElementById('userAgent').textContent = navigator.userAgent;
+
+        // Check support
+        const supportsScrollTimeline = CSS.supports('animation-timeline', 'view()');
+        const supportsContentVisibility = CSS.supports('content-visibility', 'auto');
+        const supportsWillChange = CSS.supports('will-change', 'transform');
+
+        document.getElementById('supportsScrollTimeline').textContent = supportsScrollTimeline ? '✅ YES' : '❌ NO';
+        document.getElementById('supportsContentVisibility').textContent = supportsContentVisibility ? '✅ YES' : '❌ NO';
+        document.getElementById('supportsWillChange').textContent = supportsWillChange ? '✅ YES' : '❌ NO';
+
+        // Log to console
+        console.log('=== Chrome Animation Test ===');
+        console.log('Supports scroll-timeline:', supportsScrollTimeline);
+        console.log('Supports content-visibility:', supportsContentVisibility);
+        console.log('Supports will-change:', supportsWillChange);
+        console.log('============================');
+
+        // Add scroll listener to debug
+        window.addEventListener('scroll', () => {
+            console.log('Scroll position:', window.scrollY);
+        });
+    </script>
+</body>
+
+</html>
