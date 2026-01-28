@@ -288,6 +288,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <script>
+    // Feature Detection: Check if browser supports native CSS scroll-driven animations
+    const supportsScrollTimeline = CSS.supports('animation-timeline', 'view()');
+
+    if (supportsScrollTimeline) {
+      // Chrome/Edge: Use native CSS scroll animations (better performance)
+      document.body.classList.add('supports-scroll-timeline');
+      console.log('✅ Using native CSS scroll-driven animations');
+    } else {
+      // Firefox/Safari: Use GSAP ScrollTrigger (fallback)
+      console.log('⚡ Using GSAP ScrollTrigger for scroll animations');
+    }
+
     // Register GSAP Plugin
     gsap.registerPlugin(ScrollTrigger);
 
@@ -359,75 +371,78 @@
     });
     */
 
-    // 3. Challenge Cards Stagger
-    gsap.from(".challenge-card", {
-      scrollTrigger: {
-        trigger: ".challenge-cards",
-        start: "top 80%",
-        once: true // Play once, no reverse (prevents flickering)
-      },
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power2.out"
-    });
-
-    // 4. Approach Steps
-    gsap.from(".approach-step", {
-      scrollTrigger: {
-        trigger: ".approach-steps",
-        start: "top 80%",
-        once: true // Play once, no reverse (prevents flickering)
-      },
-      y: 50,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: "power2.out"
-    });
-
-    // 5. Services Cards Stagger
-    gsap.from(".service-card", {
-      scrollTrigger: {
-        trigger: ".services-grid",
-        start: "top 80%",
-        once: true // Play once, no reverse (prevents flickering)
-      },
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power2.out"
-    });
-
-    // 6. Contact Reveal
-    gsap.from(".contact-container", {
-      scrollTrigger: {
-        trigger: ".contact",
-        start: "top 75%",
-        once: true // Play once, no reverse (prevents flickering)
-      },
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out"
-    });
-
-    // 7. Generic Reveal for remaining elements
-    gsap.utils.toArray(".reveal").forEach(elem => {
-      gsap.from(elem, {
+    // Only use GSAP scroll animations if browser doesn't support native CSS scroll-driven animations
+    if (!supportsScrollTimeline) {
+      // 3. Challenge Cards Stagger
+      gsap.from(".challenge-card", {
         scrollTrigger: {
-          trigger: elem,
-          start: "top 85%",
+          trigger: ".challenge-cards",
+          start: "top 80%",
           once: true // Play once, no reverse (prevents flickering)
         },
-        y: 30,
+        y: 50,
         opacity: 0,
+        stagger: 0.15,
         duration: 0.8,
         ease: "power2.out"
       });
-    });
+
+      // 4. Approach Steps
+      gsap.from(".approach-step", {
+        scrollTrigger: {
+          trigger: ".approach-steps",
+          start: "top 80%",
+          once: true // Play once, no reverse (prevents flickering)
+        },
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+
+      // 5. Services Cards Stagger
+      gsap.from(".service-card", {
+        scrollTrigger: {
+          trigger: ".services-grid",
+          start: "top 80%",
+          once: true // Play once, no reverse (prevents flickering)
+        },
+        y: 50,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+
+      // 6. Contact Reveal
+      gsap.from(".contact-container", {
+        scrollTrigger: {
+          trigger: ".contact",
+          start: "top 75%",
+          once: true // Play once, no reverse (prevents flickering)
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out"
+      });
+
+      // 7. Generic Reveal for remaining elements
+      gsap.utils.toArray(".reveal").forEach(elem => {
+        gsap.from(elem, {
+          scrollTrigger: {
+            trigger: elem,
+            start: "top 85%",
+            once: true // Play once, no reverse (prevents flickering)
+          },
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      });
+    }
 
     // Form Handling Script with EmailJS
     const form = document.getElementById("contactForm");
