@@ -61,6 +61,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Modern CSS: Better text wrapping (Chrome 117+, graceful fallback) */
+p,
+.muted {
+  text-wrap: pretty;
+}
+
 section {
   position: relative;
   z-index: 1;
@@ -480,6 +486,8 @@ nav a:hover::after {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
+  /* Modern CSS: Optimize animation performance */
+  will-change: transform, opacity;
 }
 
 .section-jumble {
@@ -491,6 +499,8 @@ nav a:hover::after {
   opacity: 1;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
   transition: transform 0.3s ease;
+  /* Modern CSS: Optimize hover animation */
+  will-change: transform;
 }
 
 .section-jumble:hover {
@@ -534,6 +544,10 @@ nav a:hover::after {
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* Modern CSS: Performance optimizations */
+  contain: layout paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
 }
 
 .challenge-card:hover {
@@ -579,6 +593,10 @@ nav a:hover::after {
   text-align: center;
   padding: 2.5rem 2rem;
   position: relative;
+  /* Modern CSS: Performance optimizations */
+  contain: layout paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 350px;
 }
 
 .step-number {
@@ -624,6 +642,10 @@ nav a:hover::after {
   text-align: left;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   border: 1px solid rgba(0, 0, 0, 0.03);
+  /* Modern CSS: Performance optimizations */
+  contain: layout paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 450px;
 }
 
 .service-card:hover {
@@ -702,6 +724,8 @@ nav a:hover::after {
   padding: 2.5rem 2rem;
   text-align: center;
   transition: all 0.3s ease;
+  /* Modern CSS: Performance optimizations */
+  contain: layout paint;
 }
 
 .principal-card:hover {
