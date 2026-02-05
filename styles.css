@@ -2,34 +2,43 @@
   /* Primary Colors */
   --arben-blue: #404B69;
   /* Foundation Blue */
+  --arben-blue-dark: #2A3245;
+  /* [NEW] Hover states, High-contrast text */
   --arben-gold: #F0BE46;
   /* Keystone Gold */
 
   /* Neutrals */
   --granite-white: #F9F9F9;
   --parchment: #F2EDE7;
+  /* Main Background (Warmth) */
+  --surface-white: #FFFFFF;
+  /* [NEW] Surface White */
   --ash-mist: #CCCBCB;
   --stone-gray: #6E747F;
   --sandstone: #D8CAAD;
   --ironwork: #27303C;
-  /* Main Text Color */
-  --deep-basalt: #262E40;
+  --deep-basalt: #1E2532;
+  /* [NEW] Main Body Text (Higher contrast) */
 
   /* Functional Mappings */
-  --bg-color: #FFFFFF;
-  --text-main: var(--ironwork);
+  --bg-color: var(--parchment);
+  /* Use Parchment as base */
+  --text-main: var(--deep-basalt);
   --text-muted: var(--stone-gray);
   --white: #FFFFFF;
+  --success: #2E7D32;
+  --error: #D32F2F;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  --glass-blur: blur(12px);
+  /* Glassmorphism Pro (Subtle Depth) */
+  --glass-bg: rgba(255, 255, 255, 0.90);
+  --glass-border: rgba(0, 0, 0, 0.04);
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --glass-blur: blur(8px);
 
   /* Spacing & Layout */
   --container-width: 1120px;
-  --section-padding: 6rem 1.5rem;
+  --section-padding: 8rem 1.5rem;
+  /* Increased breadth */
   --border-radius: 16px;
 
   /* Typography */
@@ -80,22 +89,26 @@ h4 {
   color: var(--arben-blue);
   margin-top: 0;
   line-height: 1.2;
+  letter-spacing: -0.01em;
+  /* Tighten up headers */
 }
 
 h1 {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
   font-weight: 700;
   font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-family: var(--font-display);
   margin-bottom: 1rem;
+  letter-spacing: -0.01em;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 600;
 }
 
@@ -285,11 +298,21 @@ img {
 }
 
 /* Clean Modern Component (Replaces Glass) */
-.glass {
-  background: var(--parchment);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+/* Clean Modern Component (Replaces Glass) */
+.glass,
+.glass-pro {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
   border-radius: var(--border-radius);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Specific component overrides using the new system */
+.glass-pro:hover {
+  border-color: rgba(64, 75, 105, 0.1);
 }
 
 /* Header */
@@ -381,12 +404,19 @@ nav a.btn::after {
 .btn-primary {
   background-color: var(--arben-blue);
   color: white;
-  box-shadow: 0 10px 20px rgba(64, 75, 105, 0.3);
+  box-shadow: 0 6px 12px rgba(64, 75, 105, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  /* Detail: Inner top glow */
 }
 
 .btn-primary:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 20px 35px rgba(64, 75, 105, 0.5);
+  transform: translateY(-2px);
+  background-color: var(--arben-blue-dark);
+  box-shadow: 0 12px 24px rgba(64, 75, 105, 0.35);
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn-secondary {
@@ -430,7 +460,7 @@ nav a.btn::after {
   background-position: right bottom;
   opacity: 0;
   /* Start hidden for animation */
-  animation: heroArchFadeIn 1.5s ease-out forwards, heroArchFloat 8s ease-in-out infinite 1.5s;
+  animation: heroArchFadeIn 1.5s ease-out forwards, heroArchFloat 10s ease-in-out infinite 1.5s;
   z-index: -1;
   pointer-events: none;
 }
@@ -452,11 +482,25 @@ nav a.btn::after {
 
   0%,
   100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-15px) scale(1.01);
+  }
+
+  /* Gentle breathe + float */
+}
+
+@keyframes keystoneFloat {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-15px);
+    transform: translateY(-12px);
   }
 }
 
@@ -507,6 +551,8 @@ nav a.btn::after {
   transform: translateZ(0);
   transition: transform 0.3s ease;
   will-change: transform;
+  animation: keystoneFloat 6s ease-in-out infinite;
+  /* Continuous float */
 }
 
 .hero-keystone:hover {
@@ -558,7 +604,8 @@ nav a.btn::after {
 
 .challenge-card {
   padding: 3rem 2rem;
-  background: var(--parchment);
+  background: var(--surface-white);
+  /* Revert base to white */
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   text-align: center;

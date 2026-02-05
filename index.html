@@ -88,7 +88,7 @@
 
       <div class="challenge-cards">
         <div class="anim-wrapper-card">
-          <div class="challenge-card">
+          <div class="challenge-card glass-pro">
             <div class="challenge-icon">🎯</div>
             <h3>Leaders Need Support</h3>
             <p class="muted">Most managers learn on the job—by making mistakes. That works eventually, but in the
@@ -96,7 +96,7 @@
           </div>
         </div>
         <div class="anim-wrapper-card">
-          <div class="challenge-card">
+          <div class="challenge-card glass-pro">
             <div class="challenge-icon">💡</div>
             <h3>Culture Needs Structure</h3>
             <p class="muted">Great culture isn't free snacks. It's what happens when people feel safe enough to speak
@@ -105,7 +105,7 @@
           </div>
         </div>
         <div class="anim-wrapper-card">
-          <div class="challenge-card">
+          <div class="challenge-card glass-pro">
             <div class="challenge-icon">🌱</div>
             <h3>People Need Stability</h3>
             <p class="muted">When everything keeps changing, even your best people start looking for the exit. Stability
@@ -195,7 +195,7 @@
 
       <div class="services-grid">
         <div class="anim-wrapper-card">
-          <div class="service-card glass">
+          <div class="service-card glass-pro">
             <div class="service-icon">🧭</div>
             <h3>Leadership Development</h3>
             <p class="muted">Good managers aren't born—they're taught. We help yours learn how to give feedback, have
@@ -209,7 +209,7 @@
         </div>
 
         <div class="anim-wrapper-card">
-          <div class="service-card glass">
+          <div class="service-card glass-pro">
             <div class="service-icon">🧱</div>
             <h3>Culture & People Strategy</h3>
             <p class="muted">Culture is how things actually get done. We help you fix the patterns that make people want
@@ -223,7 +223,7 @@
         </div>
 
         <div class="anim-wrapper-card">
-          <div class="service-card glass">
+          <div class="service-card glass-pro">
             <div class="service-icon">⚡</div>
             <h3>Wellness & Resilience</h3>
             <p class="muted">Burnout is expensive. We help you build resilience into how your team works—not as an
@@ -265,7 +265,7 @@
         </p>
       </div>
 
-      <div class="glass contact-form">
+      <div class="glass-pro contact-form">
         <form id="contactForm" method="POST">
           <div class="form-group">
             <label for="name">Name</label>
@@ -292,12 +292,12 @@
       <!-- Principals Contact Info -->
       <div class="principals-section">
         <div class="principals-grid">
-          <div class="principal-card glass">
+          <div class="principal-card glass-pro">
             <h4>Arden Smith</h4>
             <p><a href="mailto:asmith@thearbengroup.com">asmith@thearbengroup.com</a></p>
             <p><a href="tel:+14358623452">(435) 862-3452</a></p>
           </div>
-          <div class="principal-card glass">
+          <div class="principal-card glass-pro">
             <h4>Ben Harris</h4>
             <p><a href="mailto:bharris@thearbengroup.com">bharris@thearbengroup.com</a></p>
             <p><a href="tel:+14352294609">(435) 229-4609</a></p>
@@ -319,6 +319,9 @@
       <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2026 The Arben Group. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <!-- GSAP & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -511,9 +514,19 @@
       });
     }
 
+    // Initialize EmailJS
+    (function () {
+      emailjs.init("YOUR_PUBLIC_KEY"); // TODO: Replace with your actual Public Key
+    })();
+
     // Form Handling Script with EmailJS
     const form = document.getElementById("contactForm");
     const statusEl = document.getElementById("form-status");
+
+    // CONFIGURATION
+    const isTestMode = true; // Set to FALSE for production
+    const SERVICE_ID = "service_arben_main"; // Replace with your Service ID
+    const TEMPLATE_ID = "template_contact_form"; // Replace with your Template ID
 
     if (form) {
       form.addEventListener("submit", async (e) => {
@@ -524,57 +537,55 @@
         btn.disabled = true;
         btn.textContent = "Sending...";
         statusEl.textContent = "";
-        statusEl.style.color = "var(--arben-blue)";
 
         // Get form data
         const formData = {
           name: document.getElementById("name").value,
           email: document.getElementById("email").value,
           phone: document.getElementById("phone").value || "Not provided",
-          message: document.getElementById("message").value
+          message: document.getElementById("message").value,
+          to_name: "Arden & Ben" // For the email template
         };
 
         try {
-          // Send email to both addresses using a simple backend endpoint
-          // For now, we'll use a mailto fallback or you can integrate with EmailJS, Formspree, etc.
+          if (isTestMode) {
+            // SIMULATION MODE
+            console.log("📝 TEST MODE: Simulating email send...", formData);
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Fake delay
 
-          // Option 1: Use EmailJS (recommended - free tier available)
-          // You'll need to sign up at emailjs.com and get your credentials
-          // emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
-
-          // Option 2: Simple mailto fallback (opens email client)
-          const subject = encodeURIComponent(`New Contact Form Submission from ${formData.name}`);
-          const body = encodeURIComponent(
-            `Name: ${formData.name}\n` +
-            `Email: ${formData.email}\n` +
-            `Phone: ${formData.phone}\n\n` +
-            `Message:\n${formData.message}`
-          );
-
-          // Create mailto links for both recipients
-          const mailtoLink = `mailto:asmith@thearbengroup.com,bharris@thearbengroup.com?subject=${subject}&body=${body}`;
-
-          // For production, replace this with actual email service
-          // For now, we'll simulate success
-          setTimeout(() => {
-            btn.textContent = "Sent!";
-            statusEl.textContent = "Thank you! We'll be in touch within 24 hours.";
+            // Simulate Success
+            console.log("✅ TEST MODE: Email 'sent' successfully!");
+            btn.textContent = "Sent! (Test Mode)";
+            statusEl.textContent = "Test Mode: Form works! Email would be sent in production.";
             statusEl.style.color = "var(--arben-blue)";
             form.reset();
-
-            // Optional: Open mailto as backup
-            // window.location.href = mailtoLink;
 
             setTimeout(() => {
               btn.disabled = false;
               btn.textContent = originalText;
             }, 3000);
-          }, 1500);
+
+          } else {
+            // PRODUCTION MODE (Ready to Go)
+            const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, formData);
+            console.log('SUCCESS!', response.status, response.text);
+
+            btn.textContent = "Sent!";
+            statusEl.textContent = "Thank you! We'll be in touch within 24 hours.";
+            statusEl.style.color = "var(--arben-blue)";
+            form.reset();
+
+            setTimeout(() => {
+              btn.disabled = false;
+              btn.textContent = originalText;
+            }, 5000);
+          }
 
         } catch (error) {
+          console.error('FAILED...', error);
           btn.textContent = originalText;
           btn.disabled = false;
-          statusEl.textContent = "Something went wrong. Please email us directly.";
+          statusEl.textContent = "Something went wrong. Please email us at asmith@thearbengroup.com";
           statusEl.style.color = "#d32f2f";
         }
       });
