@@ -45,6 +45,24 @@
   --font-serif: "Merriweather", serif;
   --font-sans: "Montserrat", sans-serif;
   --font-display: "Montserrat Alternates", sans-serif;
+
+  /* Unified Spacing Scale */
+  --space-unit: 1rem;
+  --space-xs: calc(var(--space-unit) * 1);
+  /* 16px */
+  --space-sm: calc(var(--space-unit) * 1.5);
+  /* 24px */
+  --space-md: calc(var(--space-unit) * 2);
+  /* 32px */
+  --space-lg: calc(var(--space-unit) * 4);
+  /* 64px */
+  --space-xl: calc(var(--space-unit) * 6);
+  /* 96px */
+  --space-xxl: calc(var(--space-unit) * 8);
+  /* 128px */
+
+  --section-padding: var(--space-xxl) 1.5rem;
+  --component-margin: var(--space-lg);
 }
 
 *,
@@ -89,6 +107,7 @@ h4 {
   font-family: var(--font-sans);
   color: var(--arben-blue);
   margin-top: 0;
+  margin-bottom: var(--space-sm);
   line-height: 1.2;
   letter-spacing: -0.01em;
   /* Tighten up headers */
@@ -141,6 +160,11 @@ img {
   text-align: center;
 }
 
+/* Standardized Section Header Spacing */
+.text-center.reveal {
+  margin-bottom: var(--space-lg);
+}
+
 .muted {
   color: var(--text-muted);
 }
@@ -149,10 +173,84 @@ img {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--arben-gold);
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
+}
+
+/* Layout Utilities */
+.section-header {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-lg);
+}
+
+.section-subtext {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.section-callout {
+  margin-top: var(--space-xxl);
+  font-size: 1.25rem;
+  color: var(--arben-blue);
+  font-weight: 600;
+}
+
+.section-footer-callout {
+  margin-top: var(--space-lg);
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.divider-jumble {
+  margin: var(--space-md) auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-status-msg {
+  margin-top: var(--space-xs);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto var(--space-md) auto;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.principals-tagline {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: var(--space-md);
+  font-size: 0.95rem;
+}
+
+.footer-logo {
+  margin: 0 auto var(--space-sm) auto;
+  display: block;
+}
+
+.footer-tagline {
+  opacity: 0.7;
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  opacity: 0.5;
 }
 
 /* Background Decorations */
