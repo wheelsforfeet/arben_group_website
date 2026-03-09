@@ -29,11 +29,11 @@
   --success: #2E7D32;
   --error: #D32F2F;
 
-  /* Glassmorphism Pro (Subtle Depth) */
-  --glass-bg: rgba(255, 255, 255, 0.90);
-  --glass-border: rgba(0, 0, 0, 0.04);
-  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  --glass-blur: blur(8px);
+  /* Glassmorphism Pro Max (Enhanced Depth) per MASTER.md */
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --glass-blur: blur(16px);
 
   /* Spacing & Layout */
   --container-width: 1120px;
