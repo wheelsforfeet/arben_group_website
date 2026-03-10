@@ -257,14 +257,39 @@ img {
 .bg-shape {
   position: absolute;
   z-index: 0;
-  opacity: 0.15;
-  /* Slightly increased visibility but still faint */
+  opacity: 0.1;
+  /* Reduced for more subtlety */
   pointer-events: none;
   height: auto;
   object-fit: contain;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
+  animation: float 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Staggered durations for more natural/organic motion */
+.bg-shape:nth-child(even) {
+  animation-duration: 25s;
+  animation-delay: -2s;
+}
+
+.bg-shape:nth-child(3n) {
+  animation-duration: 30s;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(2deg);
+  }
 }
 
 /* Shape 1: Top Right Edge */
