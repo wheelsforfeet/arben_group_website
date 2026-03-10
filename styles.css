@@ -281,15 +281,19 @@ img {
 }
 
 @keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(25px, -35px); }
+}
 
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
+@keyframes float-alt {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-20px, -25px); }
+}
 
-  50% {
-    transform: translateY(-30px) rotate(2deg);
-  }
+.bg-shape:nth-child(3n) {
+  animation-name: float-alt;
+  animation-duration: 30s;
+  animation-delay: -5s;
 }
 
 /* Shape 1: Top Right Edge */
