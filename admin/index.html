@@ -24,7 +24,11 @@
       width: 100%;
       max-width: 380px;
       text-align: center;
+      align-items: center;
     }
+    /* .card is flex-column; keep the logo at its natural ratio, not stretched */
+    #login-screen .card img { width: auto; align-self: center; }
+    #login-screen .card form { width: 100%; }
     #login-screen h2 { margin-bottom: 1.5rem; }
     #login-error { color: var(--error); font-size: 0.9rem; margin-top: .5rem; min-height: 1.2em; }
 
