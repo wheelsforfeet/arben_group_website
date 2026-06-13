@@ -34,6 +34,12 @@
       z-index: 1;
     }
 
+    /* The shared .hero rule paints h1 white for the dark landing hero.
+       This hero is light, so restore brand blue for legibility (WCAG AA). */
+    .insights-hero h1 {
+      color: var(--arben-blue);
+    }
+
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
