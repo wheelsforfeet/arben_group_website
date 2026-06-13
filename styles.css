@@ -1203,3 +1203,240 @@ footer {
   backface-visibility: hidden;
   transform: translateZ(0);
 }
+
+/* ==========================================================================
+   SHARED COMPONENT LAYER
+   Used by insights.html, admin/index.html, and article.html. These pages
+   reference a component vocabulary (.card, .lead, .micro, .field, .submit,
+   .strip, .cta-band, .grid, .btn-invert) that the landing page never needed.
+   Defined here on the existing design tokens so every page stays consistent.
+   ========================================================================== */
+
+/* --- Section rhythm for the secondary pages --- */
+#insights-feed,
+.strip,
+.contact {
+  padding: var(--space-lg) 0;
+}
+
+.strip {
+  background: linear-gradient(180deg, transparent, rgba(64, 75, 105, 0.03));
+}
+
+/* --- Cards --- */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--surface-white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--border-radius);
+  box-shadow: var(--glass-shadow);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  border-color: rgba(64, 75, 105, 0.12);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.card h3 a {
+  color: var(--arben-blue);
+  transition: color 0.2s ease;
+}
+
+.card h3 a:hover {
+  color: var(--arben-gold);
+}
+
+.card p {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --- Typographic helpers --- */
+.lead {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--text-main);
+  max-width: 60ch;
+}
+
+.micro {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--arben-gold);
+  margin-bottom: 0.5rem;
+}
+
+.micro-soft {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* --- Forms (.field / .submit / .form-status) --- */
+.field {
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--arben-blue);
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  background: var(--surface-white);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-main);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--arben-blue);
+  box-shadow: 0 0 0 3px rgba(64, 75, 105, 0.1);
+}
+
+.submit {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--arben-blue);
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(64, 75, 105, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.submit:hover {
+  transform: translateY(-2px);
+  background-color: var(--arben-blue-dark);
+  box-shadow: 0 12px 24px rgba(64, 75, 105, 0.35);
+}
+
+.submit:active {
+  transform: scale(0.98);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-status {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  min-height: 1.2em;
+}
+
+/* --- Two-column contact grid --- */
+.grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+/* --- CTA band --- */
+.cta-band {
+  background: var(--arben-blue);
+  color: #fff;
+  padding: var(--space-lg) 0;
+  text-align: center;
+}
+
+.cta-band h2 {
+  color: #fff;
+}
+
+.cta-band h2:hover {
+  transform: none;
+}
+
+.btn-invert {
+  background: var(--arben-gold);
+  color: var(--arben-blue-dark);
+  margin-top: 0.5rem;
+}
+
+.btn-invert:hover {
+  transform: translateY(-2px);
+  background: #fff;
+  color: var(--arben-blue);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* --- A plain .btn (no modifier) used in sidebars --- */
+.card .btn:not(.btn-primary):not(.btn-secondary) {
+  background: var(--arben-blue);
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(64, 75, 105, 0.25);
+}
+
+.card .btn:not(.btn-primary):not(.btn-secondary):hover {
+  background: var(--arben-blue-dark);
+  transform: translateY(-2px);
+}
+
+/* --- Research library lists --- */
+.research-grid li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.research-grid a {
+  color: var(--arben-blue);
+}
+
+.research-grid a:hover {
+  color: var(--arben-gold);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  #insights-feed .container {
+    grid-template-columns: 1fr !important;
+  }
+}
