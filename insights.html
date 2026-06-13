@@ -464,51 +464,63 @@
       }
     });
 
-    // Custom entries (localStorage)
-    const STORAGE_KEY = 'arbenInsightsEntries';
     const feed = document.getElementById('feed');
-
-    function loadStoredEntries() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (err) {
-        console.error('Failed to read stored entries', err);
-        return [];
-      }
-    }
 
     function authorLabel(author) {
       const map = { ben: 'Ben Harris', arden: 'Arden Smith', research: 'Research Library' };
       return map[author] || author || 'Insight';
     }
 
+    function entryUrl(entry) {
+      if (entry.url) return entry.url;
+      if (entry.pdf_key) return `/api/files/${entry.pdf_key.replace('pdfs/', '')}`;
+      return `article.html?id=${entry.id}`;
+    }
+
+    function isExternal(entry) {
+      return !!(entry.url || entry.pdf_key);
+    }
+
     function createCard(entry) {
       const article = document.createElement('article');
-      const tags = Array.isArray(entry.tags) ? entry.tags : [];
-      const tagAttr = tags.join(',').toLowerCase();
-      article.className = 'card custom-entry';
+      const tags = (entry.tags || '').split(',').map(t => t.trim()).filter(Boolean);
+      article.className = 'card api-entry';
       article.dataset.author = entry.author || 'research';
-      article.dataset.tags = tagAttr;
+      article.dataset.tags = tags.join(',').toLowerCase();
 
-      const linkOpen = entry.url ? `<a href="${entry.url}" target="_blank" rel="noopener"${entry.url?.includes('http') ? ' class="external"' : ''}>${entry.title}</a>` : entry.title;
+      const href = entryUrl(entry);
+      const ext = isExternal(entry);
+      const linkAttr = ext ? ` target="_blank" rel="noopener" class="external"` : '';
+      const typeLabel = entry.pdf_key ? `${entry.type} · PDF` : entry.type;
 
       article.innerHTML = `
-        <div class="meta-line">${authorLabel(entry.author)} • ${entry.type || 'Entry'}</div>
-        <h3>${linkOpen}</h3>
+        <div class="meta-line">${authorLabel(entry.author)} · ${typeLabel}</div>
+        <h3><a href="${href}"${linkAttr}>${entry.title}</a></h3>
         <p class="muted">${entry.summary || ''}</p>
         <div class="pill-row">${tags.map(t => `<span class="pill">${t}</span>`).join('')}</div>
       `;
       return article;
     }
 
-    if (feed) {
-      const stored = loadStoredEntries();
-      stored.forEach(entry => {
-        const card = createCard(entry);
-        feed.prepend(card);
-      });
+    async function loadEntries() {
+      try {
+        const res = await fetch('/api/entries');
+        const entries = await res.json();
+        if (feed && entries.length) {
+          // Remove seed placeholder cards before injecting API data
+          feed.querySelectorAll('article').forEach(el => el.remove());
+          entries.forEach(entry => {
+            const card = createCard(entry);
+            feed.appendChild(card);
+          });
+          applyFilters();
+        }
+      } catch (err) {
+        console.error('Failed to load entries', err);
+      }
     }
+
+    loadEntries();
 
     // Filters
     const tabs = document.querySelectorAll('.tab');
